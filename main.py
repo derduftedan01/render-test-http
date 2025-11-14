@@ -22,7 +22,7 @@ def run_gero(data: GeroInput):
     return {"status": "success", "output": result}
 
 class CallRecord(BaseModel):
-    Start: int = Field(alias="Start")
+    Start: int = Field(alias="Start ")
     Time: str = Field(alias="Time")
     Location: str = Field(alias="Location")
     Calling_Number: int = Field(alias="Calling Number")
