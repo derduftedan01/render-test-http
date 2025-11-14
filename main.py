@@ -20,3 +20,24 @@ class GeroInput(BaseModel):
 def run_gero(data: GeroInput):
     result = gero_http.process_data(data.model_dump())
     return {"status": "success", "output": result}
+
+class CallRecord(BaseModel):
+    Start: int
+    Time: str
+    Location: str
+    Calling_Number: int
+    Called_Number: int
+    Duration_s: int
+    Answered: str
+    Direction: str
+
+class CallRecords(BaseModel):
+    records: list[CallRecord]
+
+@app.post("/call-test")
+def call_test(record: CallRecord):
+    output = {
+        "start": record.Start,
+        "calling_number": record.Calling_Number
+    }
+    return {"status": "ok", "data": output}
