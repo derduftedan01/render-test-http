@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 import gero_http
 
 app = FastAPI()
@@ -22,14 +22,17 @@ def run_gero(data: GeroInput):
     return {"status": "success", "output": result}
 
 class CallRecord(BaseModel):
-    Start: int
-    Time: str
-    Location: str
-    Calling_Number: int
-    Called_Number: int
-    Duration_s: int
-    Answered: str
-    Direction: str
+    Start: int = Field(alias="Start")
+    Time: str = Field(alias="Time")
+    Location: str = Field(alias="Location")
+    Calling_Number: int = Field(alias="Calling Number")
+    Called_Number: int = Field(alias="Called Number")
+    Duration_s: int = Field(alias="Duration (s)")
+    Answered: str = Field(alias="Answered")
+    Direction: str = Field(alias="Direction")
+
+    class Config:
+        allow_population_by_field_name = True
 
 class CallRecords(BaseModel):
     records: list[CallRecord]
